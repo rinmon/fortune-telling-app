@@ -493,38 +493,80 @@ document.getElementById('fortune-form').addEventListener('submit', async functio
         }
     } catch (err) {
         resultDiv.textContent = err.message;
-        document.getElementById('gogyo-chart-area').style.display = 'none';
+    } finally {
+        // フォーム値を保持する処理（クリア問題対策）
+        setTimeout(() => {
+            document.getElementById('birthdate').value = birthdate;
+            document.getElementById('gender').value = gender;
+            document.getElementById('theme').value = theme;
+        }, 100);
     }
 });
 
 /**
- * 星の位置（0-8のインデックス）から位置名と意味を返す
- * @param {Number} position - 星の位置インデックス（0-8）
- * @returns {String} 位置の名称と意味
+ * 九宮の位置名と意味を取得
+ * @param {number} position - 位置インデックス
+ * @return {Object} 位置情報（名称、意味、要素、解説）
  */
 function getPositionName(position) {
     const positions = [
-        '左上（精神）', '上部（理想）', '右上（目標）',
-        '左側（過去）', '中央（現在）', '右側（未来）',
-        '左下（基盤）', '下部（実践）', '右下（結果）'
+        { 
+            name: '左上（南西）', 
+            meaning: '展望・名声', 
+            element: '火', 
+            description: '人生の望みや目標を表します。社会的評価や信頭、名声を司る場所です。ここに位置する星はあなたの展望や外部からの評価に影響します。' 
+        },
+        { 
+            name: '上中（南）', 
+            meaning: 'キャリア・生業', 
+            element: '木', 
+            description: 'キャリアや生業・存在意義を表します。社会的な存在としてのアイデンティティに影響する場所です。ここに位置する星はあなたの仕事や社会的成功に影響します。' 
+        },
+        { 
+            name: '右上（南東）', 
+            meaning: 'つながり・ネットワーク', 
+            element: '土', 
+            description: '人間関係やネットワークを表します。社会的なつながりや友人関係、協力者を司る場所です。ここに位置する星はあなたの人間関係の建し方に影響します。' 
+        },
+        { 
+            name: '左中（西）', 
+            meaning: '家族・過去', 
+            element: '金', 
+            description: '家族や過去、伝統を表します。属するコミュニティや迎え入れる価値観・心の安全基地を司る場所です。ここに位置する星はあなたの家族関係や過去との関わり方に影響します。' 
+        },
+        { 
+            name: '中央', 
+            meaning: '自己・中心', 
+            element: '土', 
+            description: '自己の本質やアイデンティティの中心を表します。人格の中核や精神的な中心、意識を司る場所です。ここに位置する星はあなたの本質的な特性や生き方の核心を表します。' 
+        },
+        { 
+            name: '右中（東）', 
+            meaning: '未来・変化', 
+            element: '水', 
+            description: '未来や変化、成長を表します。新たな可能性やチャレンジ、未知の領域を司る場所です。ここに位置する星はあなたの未来志向や変化への適応力に影響します。' 
+        },
+        { 
+            name: '左下（北西）', 
+            meaning: '知性・智慧', 
+            element: '木', 
+            description: '知性や学び、智慧を表します。教育や知的探求、学習を司る場所です。ここに位置する星はあなたの学習能力や知的好奇心、思考法に影響します。' 
+        },
+        { 
+            name: '下中（北）', 
+            meaning: '健康・精神', 
+            element: '火', 
+            description: '健康や精神状態、内面的えりはを表します。身体と心のバランスや自己ケアを司る場所です。ここに位置する星はあなたの健康管理や精神的充実に影響します。' 
+        },
+        { 
+            name: '右下（北東）', 
+            meaning: '富・資源', 
+            element: '金', 
+            description: '資源や資産、物質的価値を表します。財神や金銭、物質的資源を司る場所です。ここに位置する星はあなたの資産形成や物質的安定に影響します。' 
+        }
     ];
     
-    const meanings = [
-        '考え方や哲学、内的な信念を表します。あなたの精神的な面に影響します。',
-        '理想や目指すべき高み、願望を表します。あなたが心の中で掲げる目標を示します。',
-        '具体的な目標や進むべき方向性を表します。あなたが人生で何を目指すかに影響します。',
-        '過去や起源、取り組んできた調停を表します。過去から引き継ぐ影響やパターンを示します。',
-        '現在の自分、中心的なエネルギーや人格を表します。あなたの根本的な性質に影響します。',
-        '未来や点がっていく方向性を表します。あなたが向かう先や展開に影響を与えます。',
-        '基盤や地盤、安定性を表します。あなたを支える根本的な要素に影響します。',
-        '実践や行動、具体的な取り組みを表します。あなたの行動様式や実行力に影響します。',
-        '結果や成果、実現するビジョンを表します。あなたが最終的に得るものや成果に影響します。'
-    ];
-    
-    if (position >= 0 && position < positions.length) {
-        return `${positions[position]} - ${meanings[position]}`;
-    }
-    return '不明な位置';
+    return (position >= 0 && position < positions.length) ? positions[position] : { name: '不明', meaning: '', element: '', description: '' };
 }
 
 /**
@@ -978,12 +1020,13 @@ function renderStarChart(bodyStars) {
     for (let i = 0; i < 9; i++) {
         const star = bodyStars[i];
         const info = starInfo[star] || { colorClass: '', icon: '⭐', desc: '', advice: '' };
-        html += `<div class="star-cell ${info.colorClass} animate-star" data-star="${star}">
+        html += `<div class="star-cell ${info.colorClass} animate-star" data-star="${star}" tabindex="0" aria-label="${star} ${info.desc}">
                     <span class="star-icon">${info.icon}</span>
                     <span class="star-label">${star}</span>
-                    <span class="star-tooltip">${info.desc}</span>
-                    <div class="position-number">${i}</div>
-                 </div>`;
+                    <span class="star-tooltip">${info.desc}<br>${info.advice}</span>
+                    <div class="position-number">${i+1}</div>
+                 </div>`; // position-numberは1始まりに
+
     }
     html += `</div>
              <div class="click-hint">星をクリックすると詳細が表示されます</div>
@@ -1009,48 +1052,83 @@ function renderStarChart(bodyStars) {
     
     // クリックでアドバイスと相互関係表示
     const adviceArea = document.getElementById('star-advice-area');
+    // adviceAreaが存在しない場合は作成する
+    if (!adviceArea) {
+        console.warn('star-advice-areaが存在しません。処理をスキップします。');
+        return; // adviceAreaが存在しない場合は処理を終了
+    }
+    
     const cells = area.querySelectorAll('.star-cell');
     cells.forEach((cell, index) => {
-        cell.addEventListener('click', function() {
-            const star = this.getAttribute('data-star');
+        const showDetail = function() {
+            if (!adviceArea) return; // 安全チェック
+            
+            const star = cell.getAttribute('data-star');
             const info = starInfo[star] || { desc: '', advice: '' };
             const position = index;
             // 選択した星と他の星との関係を分析
             const relations = analyzeStarRelations(bodyStars, position);
             
-            // アドバイスと相互関係を表示
-            adviceArea.innerHTML = `<div class='advice-card'>
-                                    <h3>${star}</h3>
-                                    <p><b>意味:</b> ${info.desc}</p>
-                                    <p class='advice-text'><b>アドバイス:</b> ${info.advice}</p>
-                                    <p><b>位置:</b> ${getPositionName(position)}</p>
-                                    <div class='star-relations'>
-                                        <p><b>相互関係:</b></p>
-                                        ${relations.html}
-                                    </div>
-                                </div>`;
-                                
-            // アニメーション効果
-            adviceArea.classList.remove('advice-pop');
-            void adviceArea.offsetWidth; // 再描画トリガ
-            adviceArea.classList.add('advice-pop');
-            
-            // クリックした星をハイライト
-            cells.forEach(c => c.classList.remove('selected'));
-            this.classList.add('selected');
+            try {
+                // アドバイスと相互関係を表示
+                adviceArea.innerHTML = `<div class='advice-card'>
+                                        <h3>${star}</h3>
+                                        <p><b>意味:</b> ${info.desc}</p>
+                                        <p class='advice-text'><b>アドバイス:</b> ${info.advice}</p>
+                                        <p><b>位置:</b> ${getPositionName(position)}</p>
+                                        <div class='star-relations'>
+                                            <p><b>相互関係:</b></p>
+                                            ${relations.html}
+                                        </div>
+                                    </div>`;
+                                    
+                // アニメーション効果
+                adviceArea.classList.remove('advice-pop');
+                void adviceArea.offsetWidth;
+                adviceArea.classList.add('advice-pop');
+                // クリックした星をハイライト
+                cells.forEach(c => c.classList.remove('selected'));
+                cell.classList.add('selected');
+            } catch (error) {
+                console.error('アドバイス表示エラー:', error);
+            }
+        };
+        cell.addEventListener('click', showDetail);
+        // キーボード操作・スマホ長押し対応
+        cell.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') showDetail(); });
+        cell.addEventListener('touchstart', function(e) {
+            this._touchTimer = setTimeout(showDetail, 400);
+        });
+        cell.addEventListener('touchend', function(e) {
+            clearTimeout(this._touchTimer);
         });
     });
 
-    // 初期表示は空
-    if (adviceArea) adviceArea.innerHTML = '';
+    // 初期状態で星図全体の解説＋五行バランス・運勢スコアも表示
+    let gogyoHtml = '';
+    if (typeof window.currentGogyoVals !== 'undefined') {
+        gogyoHtml = `<div class='gogyo-interpretation-content'><h3>五行バランス</h3>${interpretGogyoBalance(window.currentGogyoVals)}</div>`;
+    }
+    let scoreHtml = '';
+    if (typeof window.currentFortuneScore !== 'undefined') {
+        scoreHtml = `<div class='score-area'><b>運勢スコア:</b> <span class='score-value'>${window.currentFortuneScore}</span></div>`;
+    }
     
-    // 初期状態で星図全体の解説を表示
-    adviceArea.innerHTML = `<div class='advice-card'>
-                            <h3>星図全体の解説</h3>
-                            <p>${patternAnalysis.overallDesc}</p>
-                            <p class="click-hint">各星をクリックすると詳細が表示されます</p>
-                          </div>`;
-    adviceArea.classList.add('advice-pop');
+    // adviceAreaが存在する場合のみ処理を行う
+    if (adviceArea) {
+        try {
+            adviceArea.innerHTML = `<div class='advice-card'>
+                                  <h3>星図全体の解説</h3>
+                                  <p>${patternAnalysis.overallDesc}</p>
+                                  ${gogyoHtml}
+                                  ${scoreHtml}
+                                  <p class="click-hint">各星をクリックすると詳細が表示されます</p>
+                                </div>`;
+            adviceArea.classList.add('advice-pop');
+        } catch (error) {
+            console.error('星図全体解説表示エラー:', error);
+        }
+    }
 }
 window.renderStarChart = renderStarChart;
 
@@ -1374,15 +1452,18 @@ function drawGogyoChart(gogyoVals) {
         };
         
         // チャートオプション
+        // 実際のデータの最大値を取得する（最小値は3）
+        const dataMax = Math.max(...gogyoVals, 3);
+        
         const chartOptions = {
             responsive: true,
             maintainAspectRatio: true,
             scales: {
                 r: {
                     min: 0,
-                    max: 10,
+                    max: dataMax,
                     ticks: {
-                        stepSize: 2
+                        stepSize: 1
                     }
                 }
             }

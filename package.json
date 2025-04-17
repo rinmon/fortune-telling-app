@@ -1,6 +1,6 @@
 {
   "name": "apl-fortune-telling",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "算命学占いWebアプリケーション",
   "main": "backend/server.js",
   "scripts": {
