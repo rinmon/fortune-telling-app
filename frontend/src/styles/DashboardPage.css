@@ -1,0 +1,276 @@
+.dashboard-page {
+  padding: 2rem 0;
+  background-color: var(--background-light);
+}
+
+.welcome-message {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  font-size: 1.2rem;
+  color: var(--text-dark);
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+.dashboard-main, .dashboard-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.fortune-summary-card, .points-card, .menu-card, .kanshi-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+}
+
+.fortune-summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.fortune-summary-header h2 {
+  margin: 0;
+  color: var(--primary);
+}
+
+.fortune-date {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.fortune-score-display {
+  margin-bottom: 1.5rem;
+}
+
+.fortune-score-meter {
+  height: 12px;
+  background-color: #e0e0e0;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.fortune-score-fill {
+  height: 100%;
+  border-radius: 6px;
+  background: linear-gradient(to right, var(--secondary), var(--primary));
+}
+
+.fortune-level {
+  text-align: center;
+  font-weight: 700;
+  color: var(--primary);
+  font-size: 1.2rem;
+}
+
+.fortune-advice {
+  background-color: var(--background-light);
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+  position: relative;
+}
+
+.fortune-advice::before {
+  content: """;
+  font-size: 3rem;
+  color: var(--primary);
+  opacity: 0.1;
+  position: absolute;
+  top: -10px;
+  left: 10px;
+}
+
+.lucky-items-section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.lucky-item {
+  text-align: center;
+  padding: 0.75rem;
+  background-color: var(--background-light);
+  border-radius: 5px;
+}
+
+.lucky-item-label {
+  display: block;
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 0.25rem;
+}
+
+.lucky-item-value {
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.view-details-btn {
+  display: block;
+  text-align: center;
+  padding: 0.75rem;
+  background-color: var(--primary);
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.view-details-btn:hover {
+  background-color: var(--primary-light);
+}
+
+.points-card h2, .menu-card h2, .kanshi-card h2 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: var(--primary);
+}
+
+.points-info {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1.5rem;
+}
+
+.total-points, .login-streak {
+  text-align: center;
+}
+
+.points-value, .streak-value {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.points-label, .streak-label {
+  display: block;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.points-note {
+  background-color: var(--background-light);
+  padding: 1rem;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+
+.points-note p {
+  margin-bottom: 0.5rem;
+}
+
+.points-note p:last-child {
+  margin-bottom: 0;
+}
+
+.fortune-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.fortune-menu li {
+  margin-bottom: 1rem;
+}
+
+.fortune-menu li:last-child {
+  margin-bottom: 0;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  color: var(--text-dark);
+}
+
+.menu-item:hover {
+  background-color: var(--background-light);
+}
+
+.menu-icon {
+  font-size: 1.5rem;
+}
+
+.menu-content h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1rem;
+  color: var(--primary);
+}
+
+.menu-content p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.kanshi-info {
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.kanshi-info strong {
+  color: var(--primary);
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.5rem;
+}
+
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 1rem;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top-color: var(--primary);
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 992px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .dashboard-sidebar {
+    order: -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .lucky-items-section {
+    grid-template-columns: 1fr;
+  }
+  
+  .points-info {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}

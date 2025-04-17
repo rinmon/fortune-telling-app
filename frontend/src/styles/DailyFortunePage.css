@@ -1,0 +1,361 @@
+.daily-fortune-page {
+  padding: 2rem 0;
+  background-color: var(--background-light);
+}
+
+.fortune-date {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #666;
+}
+
+.bonus-points-alert {
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+  color: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  50% {
+    box-shadow: 0 5px 20px rgba(75, 0, 130, 0.3);
+  }
+  100% {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.bonus-icon {
+  font-size: 3rem;
+}
+
+.bonus-content h3 {
+  margin: 0 0 0.5rem;
+  color: var(--secondary);
+}
+
+.bonus-content p {
+  margin: 0 0 0.25rem;
+}
+
+.streak-info {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.fortune-overall-card, .kanshi-info-card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+}
+
+.fortune-overall-card h2, .kanshi-info-card h2 {
+  color: var(--primary);
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.fortune-score-display {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.fortune-level-badge {
+  background-color: var(--primary);
+  color: white;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 1.1rem;
+}
+
+.fortune-score-bar {
+  flex: 1;
+  height: 20px;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.fortune-score-fill {
+  height: 100%;
+  background: linear-gradient(to right, var(--secondary), var(--primary));
+  border-radius: 10px;
+}
+
+.fortune-score-value {
+  font-weight: 700;
+  color: var(--primary);
+  font-size: 1.1rem;
+}
+
+.fortune-advice-card {
+  background-color: var(--background-light);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-top: 1.5rem;
+}
+
+.fortune-advice-card h3 {
+  color: var(--primary);
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.fortune-advice-card p {
+  margin: 0;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.fortune-details-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.fortune-detail-card {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+  height: 100%;
+}
+
+.fortune-detail-card h3 {
+  color: var(--primary);
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.fortune-detail-card p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.lucky-items-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.lucky-item-card {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.lucky-item-card:hover {
+  transform: translateY(-5px);
+}
+
+.lucky-item-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.lucky-item-card h3 {
+  color: var(--primary);
+  margin: 0 0 1rem;
+  font-size: 1rem;
+}
+
+.lucky-item-value {
+  font-weight: 700;
+  color: var(--primary);
+  font-size: 1.5rem;
+}
+
+.kanshi-value {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 3rem;
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.kanshi-description {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.sharing-section {
+  background-color: white;
+  border-radius: 10px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+}
+
+.sharing-section h2 {
+  color: var(--primary);
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.sharing-section p {
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.sharing-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.share-button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.share-button:hover {
+  transform: translateY(-3px);
+  opacity: 0.9;
+}
+
+.share-twitter {
+  background-color: #1DA1F2;
+  color: white;
+}
+
+.share-line {
+  background-color: #00B900;
+  color: white;
+}
+
+.share-facebook {
+  background-color: #4267B2;
+  color: white;
+}
+
+.share-icon {
+  font-weight: 700;
+}
+
+.navigation-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.nav-button {
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary);
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.nav-button:hover {
+  background-color: var(--primary-light);
+}
+
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 0;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 1rem;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top-color: var(--primary);
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.error-container {
+  text-align: center;
+  padding: 3rem;
+}
+
+.error-container h2 {
+  color: var(--error);
+  margin-bottom: 1rem;
+}
+
+.back-button {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary);
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+@media (max-width: 992px) {
+  .fortune-details-grid, .lucky-items-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .fortune-score-display {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .fortune-details-grid, .lucky-items-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .sharing-buttons {
+    flex-direction: column;
+  }
+  
+  .navigation-buttons {
+    flex-direction: column;
+  }
+  
+  .bonus-points-alert {
+    flex-direction: column;
+    text-align: center;
+  }
+}

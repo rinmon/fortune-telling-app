@@ -1,0 +1,514 @@
+/* 星図グリッドの基本スタイル */
+/* 人体星図エリア全体のコンテナ */
+.star-chart-container {
+    position: relative;
+    margin: 20px auto;
+    max-width: 320px;
+    height: 450px;
+}
+
+/* 人体シルエットの背景 */
+.body-silhouette {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.15;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 160'%3E%3Cpath d='M50,5 C56,5 61,10 61,16 C61,22 56,27 50,27 C44,27 39,22 39,16 C39,10 44,5 50,5 Z M62,29 C62,29 65,31 65.5,35 C66,39 66,45 65,48 C64,51 62,54 62,54 L60,60 C60,60 64,62 64,66 C64,70 63,78 63,78 C63,78 68,82 69,86 C70,90 70,98 69,103 C68,108 64,115 64,115 L65,123 C65,123 67,127 67,132 C67,137 66,145 63,150 C60,155 56,158 56,158 L53,158 L54,135 L49,135 L49,158 L46,158 C46,158 42,155 39,150 C36,145 35,137 35,132 C35,127 37,123 37,123 L38,115 C38,115 34,108 33,103 C32,98 32,90 33,86 C34,82 39,78 39,78 C39,78 38,70 38,66 C38,62 42,60 42,60 L40,54 C40,54 38,51 37,48 C36,45 36,39 36.5,35 C37,31 40,29 40,29 L48,31 L50,33 L52,31 Z' fill='%234a6da7'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+    pointer-events: none;
+}
+
+.star-chart-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 10px;
+    height: 100%;
+    width: 100%;
+}
+
+/* 星セルの基本スタイル */
+.star-cell {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 8px;
+    min-height: 80px;
+    border-radius: 8px;
+    background-color: #f5f5f5;
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    cursor: pointer; /* クリック可能を示す */
+}
+
+/* 星セルのホバー効果 */
+.star-cell:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    z-index: 1;
+}
+
+/* 星のアイコン */
+.star-icon {
+    font-size: 1.5rem;
+    margin-bottom: 4px;
+    display: block;
+}
+
+/* 星のラベル */
+.star-label {
+    font-size: 0.95rem;
+    margin-bottom: 5px;
+    font-weight: bold;
+    text-shadow: 0 0 1px rgba(0,0,0,0.1);
+}
+
+/* 星のツールチップ */
+.star-tooltip {
+    font-size: 0.75rem;
+    font-weight: normal;
+    opacity: 0.8;
+}
+
+/* 星の種類ごとの色分け */
+.star-kansaku {
+    background-color: rgba(0, 200, 83, 0.2);
+    border-color: rgba(0, 200, 83, 0.7);
+    border-width: 2px;
+}
+
+.star-sekimon {
+    background-color: rgba(123, 31, 162, 0.2);
+    border-color: rgba(123, 31, 162, 0.7);
+    border-width: 2px;
+}
+
+.star-houkaku {
+    background-color: rgba(255, 213, 79, 0.2);
+    border-color: rgba(255, 213, 79, 0.7);
+    border-width: 2px;
+}
+
+.star-choujo {
+    background-color: rgba(255, 152, 0, 0.2);
+    border-color: rgba(255, 152, 0, 0.7);
+    border-width: 2px;
+}
+
+.star-rokuzon {
+    background-color: rgba(244, 67, 54, 0.2);
+    border-color: rgba(244, 67, 54, 0.7);
+    border-width: 2px;
+}
+
+.star-shiroku {
+    background-color: rgba(121, 85, 72, 0.2);
+    border-color: rgba(121, 85, 72, 0.7);
+    border-width: 2px;
+}
+
+.star-shaki {
+    background-color: rgba(33, 150, 243, 0.2);
+    border-color: rgba(33, 150, 243, 0.7);
+    border-width: 2px;
+}
+
+.star-kenkyu {
+    background-color: rgba(255, 109, 0, 0.2);
+    border-color: rgba(255, 109, 0, 0.7);
+    border-width: 2px;
+}
+
+.star-ryuko {
+    background-color: rgba(255, 235, 59, 0.2);
+    border-color: rgba(255, 235, 59, 0.7);
+    border-width: 2px;
+}
+
+.star-gyokudo {
+    background-color: rgba(224, 224, 224, 0.5);
+    border-color: rgba(189, 189, 189, 1);
+    border-width: 2px;
+}
+
+/* 星セルクリック時のアニメーション */
+.star-cell:active {
+    transform: scale(0.95);
+}
+
+/* アドバイスエリアのスタイル */
+.advice-area {
+    margin: 20px auto;
+    max-width: 600px;
+    min-height: 60px;
+}
+
+/* アドバイスカードのスタイル */
+.advice-card {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 15px 20px;
+    margin-top: 15px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    border-left: 4px solid #4285f4;
+    line-height: 1.6;
+}
+
+/* アバイステキストスタイル */
+.advice-text {
+    display: block;
+    margin-top: 8px;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+/* アニメーション効果 */
+.advice-pop {
+    animation: advice-pop-anim 0.5s ease;
+}
+
+@keyframes advice-pop-anim {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* 星の意味一覧のエリア */
+.meaning-list {
+    margin: 30px auto;
+    max-width: 600px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.meaning-list h3 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #333;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 8px;
+}
+
+/* リッチな星の意味一覧 */
+.star-meaning-rich-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 10px;
+}
+
+.star-meaning-rich-list li {
+    display: flex;
+    align-items: center;
+    padding: 8px 10px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+}
+
+.star-meaning-rich-list li:hover {
+    transform: translateY(-2px);
+}
+
+.star-meaning-rich-list .star-icon {
+    margin-right: 8px;
+    font-size: 1.2rem;
+}
+
+/* 五行バランスの解釈エリア */
+.gogyo-interpretation {
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+.gogyo-interpretation-content {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    margin-top: 15px;
+}
+
+/* 星図パターン分析エリア */
+.star-relation-area {
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+.pattern-analysis {
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-top: 15px;
+}
+
+.pattern-analysis h3 {
+    margin-top: 0;
+    color: #333;
+    font-size: 1.2rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+}
+
+.pattern-content {
+    line-height: 1.6;
+    color: #444;
+}
+
+/* 相互関係表示リスト */
+.relation-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.relation-list li {
+    padding: 8px 10px;
+    margin-bottom: 6px;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    transition: background-color 0.2s;
+    position: relative;
+    border-left: 3px solid #ddd;
+}
+
+.relation-list li:hover {
+    background-color: #f0f0f0;
+}
+
+/* 相生相克関係の色分け */
+.relation-list li.relation-generate {
+    border-left-color: #4caf50;
+}
+
+.relation-list li.relation-control {
+    border-left-color: #f44336;
+}
+
+.relation-list li.relation-generated {
+    border-left-color: #8bc34a;
+}
+
+.relation-list li.relation-controlled {
+    border-left-color: #ff9800;
+}
+
+.relation-list li.relation-neutral {
+    border-left-color: #9e9e9e;
+}
+
+.relation-list li.center {
+    border-left-color: #2196f3;
+    background-color: #e3f2fd;
+}
+
+.relation-type {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-right: 5px;
+    color: white;
+}
+
+.relation-type.relation-generate {
+    background-color: #4caf50;
+}
+
+.relation-type.relation-control {
+    background-color: #f44336;
+}
+
+.relation-type.relation-generated {
+    background-color: #8bc34a;
+}
+
+.relation-type.relation-controlled {
+    background-color: #ff9800;
+}
+
+.relation-type.relation-neutral {
+    background-color: #9e9e9e;
+}
+
+.relation-type.center {
+    background-color: #2196f3;
+}
+
+/* 選択された星のハイライト */
+.star-cell.selected {
+    transform: scale(1.05);
+    box-shadow: 0 0 12px rgba(33, 150, 243, 0.6);
+    z-index: 5;
+    border-color: #2196f3;
+    border-width: 2px;
+}
+
+/* クリックヒント */
+.click-hint {
+    text-align: center;
+    margin-top: 15px;
+    font-style: italic;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* 位置番号表示 */
+.position-number {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    font-size: 0.75rem;
+    color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gogyo-interpretation-content h3 {
+    margin-top: 0;
+    color: #333;
+    font-size: 1.2rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+}
+
+.balance-type {
+    color: #4285f4;
+    font-weight: bold;
+}
+
+/* 五行要素の列挙 */
+.gogyo-elements {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+    justify-content: center;
+}
+
+.gogyo-element {
+    padding: 6px 10px;
+    border-radius: 20px;
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.9rem;
+    opacity: 0.7;
+    border: 1px solid #ddd;
+}
+
+.gogyo-element.active {
+    opacity: 1;
+}
+
+.gogyo-element.emphasis {
+    font-weight: bold;
+    border-width: 2px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.gogyo-element.weak {
+    opacity: 0.5;
+    border-style: dashed;
+}
+
+.element-icon {
+    font-size: 1.1rem;
+}
+
+.element-name {
+    font-weight: bold;
+}
+
+.element-value {
+    background-color: rgba(0,0,0,0.05);
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 2px;
+    font-size: 0.8rem;
+}
+
+.element-desc {
+    display: none;
+}
+
+.gogyo-description {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 12px 15px;
+    margin-top: 10px;
+    color: #444;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* ツールチップ */
+.star-tooltip {
+  visibility: hidden;
+  opacity: 0;
+  background: #222;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 4px 8px;
+  position: absolute;
+  z-index: 10;
+  bottom: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.92em;
+  min-width: 80px;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+.star-cell:hover .star-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+.star-label {
+  z-index: 2;
+}
+.star-cell:hover {
+  background: #e0e7ff;
+}
+@media (max-width: 600px) {
+  .star-chart-grid {
+    grid-template-columns: repeat(3, 40px);
+    grid-template-rows: repeat(3, 40px);
+  }
+  .star-cell {
+    font-size: 0.95rem;
+    height: 40px;
+    width: 40px;
+  }
+}

@@ -1,0 +1,97 @@
+.header {
+  background-color: var(--primary);
+  padding: 1rem 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-light);
+  text-decoration: none;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-link {
+  color: var(--text-light);
+  font-weight: 500;
+  transition: opacity 0.3s ease;
+}
+
+.nav-link:hover {
+  opacity: 0.8;
+  color: var(--secondary);
+}
+
+.register-btn, .logout-btn {
+  background-color: var(--secondary);
+  color: var(--text-dark);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.register-btn:hover, .logout-btn:hover {
+  background-color: var(--secondary-light);
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.username {
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+.points {
+  background-color: var(--secondary);
+  color: var(--text-dark);
+  padding: 0.25rem 0.5rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .nav {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .user-menu {
+    flex-direction: column;
+    width: 100%;
+    margin-top: 1rem;
+    align-items: flex-start;
+  }
+  
+  .register-btn, .logout-btn {
+    width: 100%;
+  }
+}

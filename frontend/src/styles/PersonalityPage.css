@@ -1,0 +1,237 @@
+.personality-page {
+  padding: 2rem 0;
+  background-color: var(--background-light);
+}
+
+.kanshi-card, .personality-traits-card, .personality-explanation-card, .personality-tips-card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+}
+
+.kanshi-card h2, .personality-traits-card h2, .personality-explanation-card h2, .personality-tips-card h2, .strengths-card h2, .weaknesses-card h2 {
+  color: var(--primary);
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.kanshi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.kanshi-item {
+  text-align: center;
+  padding: 1rem;
+  background-color: var(--background-light);
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.kanshi-item:hover {
+  transform: translateY(-5px);
+}
+
+.kanshi-item h3 {
+  color: var(--primary);
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.kanshi-value {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 2rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.kanshi-description {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.5;
+}
+
+.traits-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.trait-item {
+  background-color: var(--primary-light);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 500;
+  transition: transform 0.2s ease;
+}
+
+.trait-item:hover {
+  transform: scale(1.05);
+}
+
+.strengths-weaknesses-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.strengths-card, .weaknesses-card {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+}
+
+.strengths-card {
+  border-left: 5px solid var(--success);
+}
+
+.weaknesses-card {
+  border-left: 5px solid var(--warning);
+}
+
+.strengths-card ul, .weaknesses-card ul {
+  padding-left: 1.5rem;
+}
+
+.strengths-card li, .weaknesses-card li {
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+}
+
+.personality-explanation-card p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.personality-explanation-card p:last-child {
+  margin-bottom: 0;
+}
+
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.tip-item {
+  background-color: var(--background-light);
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.tip-item:hover {
+  transform: translateY(-5px);
+}
+
+.tip-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.tip-item h3 {
+  color: var(--primary);
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.tip-item p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.navigation-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.nav-button {
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary);
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.nav-button:hover {
+  background-color: var(--primary-light);
+}
+
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 0;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 1rem;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top-color: var(--primary);
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.error-container {
+  text-align: center;
+  padding: 3rem;
+}
+
+.error-container h2 {
+  color: var(--error);
+  margin-bottom: 1rem;
+}
+
+.back-button {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary);
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+@media (max-width: 992px) {
+  .kanshi-grid, .tips-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .strengths-weaknesses-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .kanshi-grid, .tips-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .navigation-buttons {
+    flex-direction: column;
+  }
+}

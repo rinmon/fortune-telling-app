@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>算命学占いアプリ</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./star-chart.css">
+</head>
+<body>
+    <div class="container">
+        <header class="site-header">
+            <h1>算命学占い</h1>
+            <nav class="main-nav">
+                <a href="./admin/admin.html" class="admin-link">管理画面</a>
+            </nav>
+        </header>
+        
+        <!-- ウェルカムバックメッセージ (初期は非表示) -->
+        <div id="welcome-back" class="welcome-back" style="display:none;">
+            <div class="welcome-message">
+                <h2>おかえりなさい、<span id="user-profile-name"></span>さん <button id="edit-nickname" class="nickname-edit-btn" title="ニックネームを変更する">編集</button></h2>
+                <p>前回の占いから<span id="days-since-last"></span>日が経過しました。</p>
+            </div>
+            <div class="welcome-actions">
+                <button id="view-last-result" class="action-button">前回の結果を見る</button>
+                <button id="view-all-history" class="action-button">占い履歴を見る</button>
+                <button id="new-fortune" class="action-button">新しい占いをする</button>
+            </div>
+            <div class="user-profile-summary">
+                <p><strong>生年月日:</strong> <span id="user-birthdate"></span></p>
+                <p><strong>性別:</strong> <span id="user-gender"></span></p>
+            </div>
+        </div>
+        <form id="fortune-form">
+            <label for="birthdate">生年月日:</label>
+            <input type="date" id="birthdate" name="birthdate" required>
+            <label for="gender">性別:</label>
+            <select id="gender" name="gender" required>
+                <option value="">選択してください</option>
+                <option value="male">男性</option>
+                <option value="female">女性</option>
+                <option value="other">その他</option>
+            </select>
+            <input type="hidden" id="theme" name="theme" value="all">
+            
+            <div class="form-divider">生年月日に基づく基本占い</div>
+            <button type="submit" class="primary-button">基本占いを見る</button>
+            
+            <div class="form-divider">時間運占い</div>
+            <div class="time-fortune-options">
+                <label class="radio-label">
+                    <input type="radio" name="time-fortune" value="day" id="day-fortune" checked>
+                    <span class="radio-text">今日の運勢</span>
+                </label>
+                <label class="radio-label">
+                    <input type="radio" name="time-fortune" value="month" id="month-fortune">
+                    <span class="radio-text">今月の運勢</span>
+                </label>
+                <label class="radio-label">
+                    <input type="radio" name="time-fortune" value="year" id="year-fortune">
+                    <span class="radio-text">今年の運勢</span>
+                </label>
+            </div>
+            <button type="button" id="time-fortune-button" class="secondary-button">時間運占いを見る</button>
+        </form>
+        <div id="result" class="result-area"></div>
+        <div id="gogyo-chart-area" style="display:none; margin-top:24px;">
+            <!-- チャート対応コンテナ -->
+        </div>
+        <!-- 人体星図の下にアドバイス表示エリア -->
+        <div id="star-advice-area" class="advice-area"></div>
+        <!-- 星の意味・役割一覧を常時表示（アイコン・絵文字付きリッチ表示） -->
+        <div id="star-meaning-list" class="meaning-list rich">
+            <h3>★ 各星の意味・キーワード一覧</h3>
+            <ul class="star-meaning-rich-list">
+                <li><span class="star-icon star-kansaku">🟢</span><b>貫索星</b>：自立心・守り・信念</li>
+                <li><span class="star-icon star-sekimon">🟣</span><b>石門星</b>：協調性・つながり・ネットワーク</li>
+                <li><span class="star-icon star-houkaku">🟡</span><b>鳳閣星</b>：表現力・自由・楽しみ</li>
+                <li><span class="star-icon star-choujo">🟠</span><b>調舒星</b>：感受性・芸術・繊細さ</li>
+                <li><span class="star-icon star-rokuzon">🔴</span><b>禄存星</b>：愛情・奉仕・包容力</li>
+                <li><span class="star-icon star-shiroku">🟤</span><b>司禄星</b>：堅実・蓄積・管理</li>
+                <li><span class="star-icon star-shaki">🔵</span><b>車騎星</b>：行動力・実行・競争心</li>
+                <li><span class="star-icon star-kenkyu">🟧</span><b>牽牛星</b>：責任感・社会性・リーダー</li>
+                <li><span class="star-icon star-ryuko">🟨</span><b>龍高星</b>：知識・探究・冒険心</li>
+                <li><span class="star-icon star-gyokudo">⚪️</span><b>玉堂星</b>：学び・伝統・知恵</li>
+            </ul>
+        </div>
+    </div>
+    <!-- Chart.js ローカル読み込み -->
+    <script src="./chart.min.js"></script>
+    <!-- API連携機能 -->
+    <script src="./api.js"></script>
+    <!-- メインスクリプト -->
+    <script src="./main.js"></script>
+    <!-- 時間運占い機能 -->
+    <script src="./time-fortune.js"></script>
+</body>
+</html>

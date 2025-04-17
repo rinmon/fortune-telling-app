@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>算命学占い管理パネル</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="./admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- ログイン画面 -->
+        <div id="login-area" class="admin-panel">
+            <div class="login-header">
+                <h1>管理パネル ログイン</h1>
+                <a href="../index.html" class="back-to-site">メインページに戻る</a>
+            </div>
+            <div class="login-form">
+                <div class="form-group">
+                    <label for="username">ユーザー名</label>
+                    <input type="text" id="username" placeholder="管理者ユーザー名">
+                </div>
+                <div class="form-group">
+                    <label for="password">パスワード</label>
+                    <input type="password" id="password" placeholder="パスワード">
+                </div>
+                <div class="form-actions">
+                    <button type="button" id="login-button" class="primary-button">ログイン</button>
+                </div>
+                <div id="login-error" class="error-message"></div>
+            </div>
+        </div>
+
+        <!-- 管理パネル本体（ログイン後に表示） -->
+        <div id="admin-dashboard" class="admin-panel" style="display: none;">
+            <div class="admin-header">
+                <h1>算命学占い管理パネル</h1>
+                <div class="header-actions">
+                    <a href="../index.html" class="back-to-site">メインページに戻る</a>
+                    <button id="logout-button" class="secondary-button">ログアウト</button>
+                </div>
+            </div>
+
+            <div class="admin-tabs">
+                <button class="tab-button active" data-tab="statistics">利用統計</button>
+                <button class="tab-button" data-tab="settings">基本設定</button>
+                <button class="tab-button" data-tab="data">データ管理</button>
+            </div>
+
+            <!-- 統計タブ -->
+            <div id="statistics-tab" class="tab-content active">
+                <h2>利用統計</h2>
+                <div class="stats-cards">
+                    <div class="stat-card">
+                        <h3>総利用回数</h3>
+                        <div class="stat-value" id="total-uses">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>今日の利用回数</h3>
+                        <div class="stat-value" id="today-uses">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>ユニークユーザー数</h3>
+                        <div class="stat-value" id="unique-users">0</div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h3>過去30日間の利用推移</h3>
+                    <canvas id="usageChart"></canvas>
+                </div>
+                <div class="data-tables">
+                    <div class="data-table">
+                        <h3>占いタイプ別利用状況</h3>
+                        <table id="fortune-type-table">
+                            <thead>
+                                <tr>
+                                    <th>占いタイプ</th>
+                                    <th>利用回数</th>
+                                    <th>割合</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- データはJSで動的に挿入 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 設定タブ -->
+            <div id="settings-tab" class="tab-content">
+                <h2>基本設定</h2>
+                <form id="settings-form">
+                    <div class="settings-section">
+                        <h3>一般設定</h3>
+                        <div class="form-group">
+                            <label for="site-title">サイトタイトル</label>
+                            <input type="text" id="site-title" value="算命学占い">
+                        </div>
+                        <div class="form-group">
+                            <label for="results-to-keep">保存する結果数</label>
+                            <input type="number" id="results-to-keep" min="5" max="100" value="20">
+                            <p class="form-help">ローカルストレージに保存する占い結果の最大数</p>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>表示設定</h3>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="show-all-themes" checked>
+                                常にすべてのテーマを表示する
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="enable-animations" checked>
+                                アニメーション効果を有効にする
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="primary-button">設定を保存</button>
+                        <button type="reset" class="secondary-button">リセット</button>
+                    </div>
+                </form>
+                <div id="settings-message"></div>
+            </div>
+
+            <!-- データ管理タブ -->
+            <div id="data-tab" class="tab-content">
+                <h2>データ管理</h2>
+                <div class="data-actions">
+                    <div class="action-card">
+                        <h3>データのエクスポート</h3>
+                        <p>すべての保存された占い結果をJSONファイルとしてエクスポートします。</p>
+                        <button id="export-data" class="primary-button">エクスポート</button>
+                    </div>
+                    <div class="action-card">
+                        <h3>データのインポート</h3>
+                        <p>以前にエクスポートしたデータをインポートします。</p>
+                        <input type="file" id="import-file" accept=".json" style="display: none;">
+                        <button id="import-trigger" class="primary-button">ファイルを選択</button>
+                        <span id="file-name"></span>
+                        <button id="import-data" class="secondary-button" disabled>インポート</button>
+                    </div>
+                    <div class="action-card warning">
+                        <h3>全データのリセット</h3>
+                        <p>注意: すべての保存されたデータが削除されます。この操作は元に戻せません。</p>
+                        <button id="reset-data" class="danger-button">データをリセット</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../chart.min.js"></script>
+    <script src="./admin.js"></script>
+</body>
+</html>

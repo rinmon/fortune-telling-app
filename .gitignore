@@ -1,0 +1,19 @@
+# 依存関係
+node_modules/
+
+# 環境変数
+.env
+
+# ログファイル
+*.log
+npm-debug.log*
+
+# ランタイムデータ
+backend/data/users/*.json
+
+# Mac関連
+.DS_Store
+
+# エディタ関連
+.vscode/
+.idea/
