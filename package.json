@@ -1,6 +1,6 @@
 {
   "name": "apl-fortune-telling",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "算命学占いWebアプリケーション",
   "main": "backend/server.js",
   "scripts": {
@@ -11,7 +11,10 @@
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "helmet": "^7.1.0",
-    "cookie-parser": "^1.4.6"
+    "cookie-parser": "^1.4.6",
+    "lunar-javascript": "^1.6.1",
+    "crypto-js": "^4.1.1",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
