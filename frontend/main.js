@@ -948,7 +948,8 @@ function drawGogyoChart(vals) {
         ];
         
         // Chart.jsでグラフ描画
-        const chart = new Chart(ctx, {
+        // const を let に変更して再代入問題を解決
+        let chart = new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: labels,
