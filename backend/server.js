@@ -241,16 +241,16 @@ app.get('/api/admin/stats', (req, res) => {
   }
 });
 
-// ルートアクセスとその他のすべてのパスでindex.htmlを返す
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/index.html'));
-});
-
 // ルートの設定
 app.use('/api/sanmei', require('./routes/sanmeiRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/daily', require('./routes/dailyRoutes'));
 app.use('/api/fortune', require('./routes/fortune'));
+
+// ルートアクセスとその他のすべてのパスでindex.htmlを返す
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/index.html'));
+});
 
 // サーバーの起動
 app.listen(PORT, () => {

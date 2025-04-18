@@ -78,10 +78,38 @@
 
 /* 星のツールチップ */
 .star-tooltip {
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     font-weight: normal;
-    opacity: 0.8;
+    opacity: 0.95;
+    background: #222;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 6px 12px;
+    position: absolute;
+    z-index: 10;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 120px;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    visibility: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    line-height: 1.6;
 }
+.star-cell:hover .star-tooltip,
+.star-cell:focus .star-tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+@media (hover: none) and (pointer: coarse) {
+  .star-cell:active .star-tooltip {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
 
 /* 星の種類ごとの色分け */
 .star-kansaku {
@@ -502,13 +530,26 @@
   background: #e0e7ff;
 }
 @media (max-width: 600px) {
+  .star-chart-container {
+    max-width: 99vw;
+    height: 330px;
+  }
   .star-chart-grid {
-    grid-template-columns: repeat(3, 40px);
-    grid-template-rows: repeat(3, 40px);
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 5px;
   }
   .star-cell {
-    font-size: 0.95rem;
-    height: 40px;
-    width: 40px;
+    font-size: 0.88rem;
+    min-height: 36px;
+    padding: 6px 2px;
+  }
+  .star-icon {
+    font-size: 1.15rem;
+  }
+  .position-number {
+    font-size: 0.68rem;
+    width: 14px;
+    height: 14px;
   }
 }
